@@ -1,23 +1,36 @@
 import React from "react";
+import Image from "next/image";
+import { Rubik } from "next/font/google";
+import { IoSearch } from "react-icons/io5";
+import { FaRegUserCircle } from "react-icons/fa";
+
+const rubik = Rubik({
+  subsets: ["latin"],
+  weight: ["500"],
+});
 
 type Props = {};
 
-export default function Header({}: Props) {
+const Header = (props: Props) => {
   return (
-    <header>
-      <div className="h-10 grid grid-cols-3 place-content-evenly">
-        <section className="text-center">Reciply</section>
-        <section className="flex gap-8">
-          <span>Discover</span>
-          <span>My Recipes</span>
-          <span>Following</span>
-          <span>ChatGPT</span>
+    <header className={rubik.className}>
+      <div className="h-16 bg-light grid grid-cols-3 place-content-evenly">
+        <section>
+          <Image className="mx-auto" src="/logo.png" width={100} height={100} alt="Picture of the author" />
         </section>
-        <section className="flex gap-8 pl-12">
-          <span>Search</span>
-          <span>Profile</span>
+        <section className="flex gap-8 place-content-evenly items-center">
+          <span>DISCOVER</span>
+          <span>MY RECIPES</span>
+          <span>FOLLOWING</span>
+          <span>CHAT-GPT</span>
+        </section>
+        <section className="mr-40 flex gap-8 place-content-center items-center">
+          <IoSearch className="text-lg" />
+          <FaRegUserCircle className="text-lg" />
         </section>
       </div>
     </header>
   );
-}
+};
+
+export default Header;
