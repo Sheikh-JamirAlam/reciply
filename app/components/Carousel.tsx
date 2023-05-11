@@ -20,7 +20,7 @@ const rubik = Rubik({
 type Props = {};
 
 const Carousel = (props: Props) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: true })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
 
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
@@ -36,24 +36,29 @@ const Carousel = (props: Props) => {
     <div className="overflow-hidden">
       <div className="w-full" ref={emblaRef}>
         <div className="flex">
-          <div className="min-w-0 max-h-[65vh] flex-100 cursor-default">
-            <h1 className={`${mPlusRounded.className} w-64 top-[30%] left-[60%] absolute text-4xl text-light`}>TASTY RAMEN RECIPES</h1>
-            <p className={`${rubik.className} top-[45%] left-[60%] absolute text-light`}>Make delicious ramen from scratch.</p>
-            <button className={`p-2 top-[55%] left-[60%] absolute bg-pumpkin rounded-sm text-light text-xl`}>
+          <div className="min-w-0 max-h-[65vh] flex-100">
+            <h1 className={`${mPlusRounded.className} w-64 top-[30%] left-[60%] relative text-4xl text-light`}>TASTY RAMEN RECIPES</h1>
+            <p className={`${rubik.className} w-72 top-[30%] left-[60%] relative text-light`}>Make delicious ramen from scratch.</p>
+            <button className={`p-2 w-32 top-[32%] left-[60%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Get Recipe</span>
             </button>
-            <img src="./carousel/ramen.jpg" alt="Ramen" className="w-full h-full relative z-[-1] brightness-75 object-cover xl:h-auto xl:bottom-[10vh] 2xl:bottom-[15vh]" />
+            <img src="./carousel/ramen.jpg" alt="Ramen" className="w-full h-full relative z-[-1] brightness-75 object-cover bottom-[148px] xl:h-auto xl:bottom-[20vh] 2xl:bottom-[29vh]" />
           </div>
-          <div className="min-w-0 max-h-[65vh] flex-100 cursor-default">
-            <h1 className={`${mPlusRounded.className} w-64 top-[30%] left-[60%] absolute text-4xl text-light`}>HEALTHY FOOD RECIPES</h1>
-            <p className={`${rubik.className} top-[45%] left-[60%] absolute text-light`}>Make delicious ramen from scratch.</p>
-            <button className={`p-2 top-[55%] left-[60%] absolute bg-pumpkin rounded-sm text-light text-xl`}>
-              <span className={`${rubik.className}`}>Get Recipe</span>
+          <div className="min-w-0 max-h-[65vh] flex-100">
+            <h1 className={`${mPlusRounded.className} w-72 top-[50%] left-[30%] relative text-4xl text-light`}>HEALTHY FOOD RECIPES</h1>
+            <p className={`${rubik.className} w-72 top-[50%] left-[30%] relative text-light`}>Find easy to follow delicious recipes.</p>
+            <button className={`p-2 w-32 top-[52%] left-[30%] relative bg-pumpkin rounded-sm text-light text-xl`}>
+              <span className={`${rubik.className}`}>Register</span>
             </button>
-            <img src="./carousel/taco.jpg" alt="Taco" className="w-full h-full relative z-[-1] brightness-[.85] object-cover xl:h-auto xl:bottom-[20vh] 2xl:bottom-[40vh]" />
+            <img src="./carousel/taco.jpg" alt="Taco" className="w-full h-full relative z-[-1] brightness-[.85] object-cover bottom-[148px] xl:h-auto xl:bottom-[25vh] 2xl:bottom-[45vh]" />
           </div>
-          <div className="min-w-0 max-h-[65vh] flex-100 cursor-default">
-            <img src="./carousel/pasta.jpg" alt="Pasta" className="w-full h-full relative z-[-1] brightness-[.85] object-cover xl:h-auto xl:bottom-[20vh] 2xl:bottom-[30vh]" />
+          <div className="min-w-0 max-h-[65vh] flex-100">
+            <h1 className={`${mPlusRounded.className} w-72 top-[35%] left-[65%] relative text-4xl text-light`}>EASY CHEESY PASTA</h1>
+            <p className={`${rubik.className} w-72 top-[35%] left-[65%] relative text-light`}>Simple and delicious pasta recipes.</p>
+            <button className={`p-2 w-32 top-[37%] left-[65%] relative bg-pumpkin rounded-sm text-light text-xl`}>
+              <span className={`${rubik.className}`}>Let&apos;s Cook</span>
+            </button>
+            <img src="./carousel/pasta.jpg" alt="Pasta" className="w-full h-full relative z-[-1] brightness-[.85] object-cover bottom-[148px] xl:h-auto xl:bottom-[25vh] 2xl:bottom-[45vh]" />
           </div>
         </div>
         <button className="top-[35%] left-8 absolute" onClick={scrollPrev}>
