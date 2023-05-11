@@ -14,6 +14,9 @@ module.exports = {
         orange: '#FA9146',
         pumpkin: '#F1721A',
       },
+      flex: {
+        '100': '0 0 100%'
+      },
     },
   },
   plugins: [],
