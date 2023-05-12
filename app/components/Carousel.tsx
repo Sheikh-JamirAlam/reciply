@@ -20,7 +20,7 @@ const rubik = Rubik({
 type Props = {};
 
 const Carousel = (props: Props) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 3000, stopOnInteraction: false })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
 
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
