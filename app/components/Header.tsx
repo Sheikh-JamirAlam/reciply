@@ -16,7 +16,7 @@ const Header = (props: Props) => {
     <header className={rubik.className}>
       <div className="h-16 bg-light grid grid-cols-3 place-content-evenly">
         <section>
-          <Image className="mx-auto" src="/logo.png" width={100} height={100} alt="Reciply Logo" />
+          <Image className="mx-auto" src="/logo.png" width={100} height={100} quality={100} alt="Reciply Logo" />
         </section>
         <section className="flex gap-8 place-content-evenly items-center">
           <span>DISCOVER</span>

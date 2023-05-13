@@ -15,12 +15,16 @@ type Props = {};
 
 const Featured = (props: Props) => {
   const [selectedFilter, setSelectedFilter] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowWidth, setWindowWidth] = useState(() => {
+    return typeof window !== "undefined" ? window.innerWidth : 0;
+  });
   const [sliceValue, setSliceValue] = useState(8);
 
-  window.onresize = () => {
-    setWindowWidth(() => window.innerWidth);
-  };
+  if (typeof window !== "undefined") {
+    window.onresize = () => {
+      setWindowWidth(() => window.innerWidth);
+    };
+  }
 
   useEffect(() => {
     if (windowWidth >= 768) {
@@ -66,11 +70,9 @@ const Featured = (props: Props) => {
           .slice(0, sliceValue)
           .map((recipe: Recipe, index: number) => {
             return (
-              <>
-                <div key={index} className="h-[20vh] w-[20vh] mb-8 bg-platinum">
-                  <p className="ml-1 mt-2 text-xs top-[20vh] relative">{recipe.name}</p>
-                </div>
-              </>
+              <div key={index} className="h-[20vh] w-[20vh] mb-8 bg-platinum">
+                <p className="ml-1 mt-2 text-xs top-[20vh] relative">{recipe.name}</p>
+              </div>
             );
           })}
       </section>
