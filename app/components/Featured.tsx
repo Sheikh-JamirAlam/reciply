@@ -20,7 +20,11 @@ const Featured = () => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
   const [sliceValue, setSliceValue] = useState(() => {
-    return window.innerWidth >= 768 ? 8 : 6;
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 768 ? 8 : 6;
+    } else {
+      return 8;
+    }
   });
 
   useEffect(() => {
