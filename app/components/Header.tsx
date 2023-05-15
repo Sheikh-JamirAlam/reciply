@@ -9,9 +9,7 @@ const rubik = Rubik({
   weight: ["500"],
 });
 
-type Props = {};
-
-const Header = (props: Props) => {
+const Header = () => {
   return (
     <header className={rubik.className}>
       <div className="h-16 bg-light grid grid-cols-3 place-content-evenly">

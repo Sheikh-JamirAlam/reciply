@@ -12,9 +12,7 @@ const rubik = Rubik({
   weight: ["600"],
 });
 
-type Props = {};
-
-const Featured = (props: Props) => {
+const Featured = () => {
   const [selectedFilter, setSelectedFilter] = useState("all");
   const [featured, setFeatured] = useState(Array<Recipe>);
   const [sliceValue, setSliceValue] = useState(8);

@@ -17,9 +17,7 @@ const rubik = Rubik({
   weight: ["400"],
 });
 
-type Props = {};
-
-const Carousel = (props: Props) => {
+const Carousel = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
 
   const scrollPrev = useCallback(() => {
