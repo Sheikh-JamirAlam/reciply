@@ -20,19 +20,21 @@ const Testimonial = () => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
   const [sliceValue, setSliceValue] = useState(() => {
-    return window.innerWidth >= 1024 ? 3 : 2;
+    return window.innerWidth >= 1040 ? 3 : 2;
   });
 
   useEffect(() => {
-    const handleResize = () => setWindowWidth(() => window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+    if (typeof window !== "undefined") {
+      const handleResize = () => setWindowWidth(() => window.innerWidth);
+      window.addEventListener("resize", handleResize);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, []);
 
   useEffect(() => {
-    if (windowWidth >= 1024) {
+    if (windowWidth >= 1040) {
       setSliceValue(3);
     } else if (windowWidth >= 744) {
       setSliceValue(2);
