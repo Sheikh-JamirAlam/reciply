@@ -3,9 +3,9 @@
 
 import React, { useCallback } from "react";
 import { Righteous, Rubik } from "next/font/google";
+import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
-import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 
 const righteous = Righteous({
   subsets: ["latin"],
@@ -35,24 +35,24 @@ const Carousel = () => {
       <div className="w-full" ref={emblaRef}>
         <div className="flex">
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${righteous.className} w-64 top-[30%] left-[60%] relative text-4xl text-light`}>TASTY RAMEN RECIPES</h1>
-            <p className={`${rubik.className} w-72 top-[30%] left-[60%] relative text-light`}>Make delicious ramen from scratch.</p>
+            <h1 className={`${righteous.className} w-64 top-[30%] left-[60%] relative text-4xl text-light cursor-default`}>TASTY RAMEN RECIPES</h1>
+            <p className={`${rubik.className} w-72 top-[30%] left-[60%] relative text-light cursor-default`}>Make delicious ramen from scratch.</p>
             <button className={`p-2 w-32 top-[32%] left-[60%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Get Recipe</span>
             </button>
             <img src="./carousel/ramen.jpg" alt="Ramen" className="w-full h-full relative z-[-1] brightness-75 object-cover bottom-[148px] xl:h-auto xl:bottom-[20vh] 2xl:bottom-[29vh]" />
           </div>
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${righteous.className} w-72 top-[50%] left-[30%] relative text-4xl text-light`}>HEALTHY FOOD RECIPES</h1>
-            <p className={`${rubik.className} w-72 top-[50%] left-[30%] relative text-light`}>Find easy to follow delicious recipes.</p>
+            <h1 className={`${righteous.className} w-72 top-[50%] left-[30%] relative text-4xl text-light cursor-default`}>HEALTHY FOOD RECIPES</h1>
+            <p className={`${rubik.className} w-72 top-[50%] left-[30%] relative text-light cursor-default`}>Find easy to follow delicious recipes.</p>
             <button className={`p-2 w-32 top-[52%] left-[30%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Register</span>
             </button>
             <img src="./carousel/taco.jpg" alt="Taco" className="w-full h-full relative z-[-1] brightness-[.85] object-cover bottom-[148px] xl:h-auto xl:bottom-[25vh] 2xl:bottom-[45vh]" />
           </div>
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${righteous.className} w-72 top-[35%] left-[65%] relative text-4xl text-light`}>EASY CHEESY PASTA</h1>
-            <p className={`${rubik.className} w-72 top-[35%] left-[65%] relative text-light`}>Simple and delicious pasta recipes.</p>
+            <h1 className={`${righteous.className} w-72 top-[35%] left-[65%] relative text-4xl text-light cursor-default`}>EASY CHEESY PASTA</h1>
+            <p className={`${rubik.className} w-72 top-[35%] left-[65%] relative text-light cursor-default`}>Simple and delicious pasta recipes.</p>
             <button className={`p-2 w-32 top-[37%] left-[65%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Let&apos;s Cook</span>
             </button>
