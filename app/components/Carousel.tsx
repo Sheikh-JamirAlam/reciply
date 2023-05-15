@@ -2,14 +2,14 @@
 "use client";
 
 import React, { useCallback } from "react";
-import { M_PLUS_Rounded_1c, Rubik } from "next/font/google";
+import { Righteous, Rubik } from "next/font/google";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 
-const mPlusRounded = M_PLUS_Rounded_1c({
+const righteous = Righteous({
   subsets: ["latin"],
-  weight: ["800"],
+  weight: ["400"],
 });
 
 const rubik = Rubik({
@@ -37,7 +37,7 @@ const Carousel = (props: Props) => {
       <div className="w-full" ref={emblaRef}>
         <div className="flex">
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${mPlusRounded.className} w-64 top-[30%] left-[60%] relative text-4xl text-light`}>TASTY RAMEN RECIPES</h1>
+            <h1 className={`${righteous.className} w-64 top-[30%] left-[60%] relative text-4xl text-light`}>TASTY RAMEN RECIPES</h1>
             <p className={`${rubik.className} w-72 top-[30%] left-[60%] relative text-light`}>Make delicious ramen from scratch.</p>
             <button className={`p-2 w-32 top-[32%] left-[60%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Get Recipe</span>
@@ -45,7 +45,7 @@ const Carousel = (props: Props) => {
             <img src="./carousel/ramen.jpg" alt="Ramen" className="w-full h-full relative z-[-1] brightness-75 object-cover bottom-[148px] xl:h-auto xl:bottom-[20vh] 2xl:bottom-[29vh]" />
           </div>
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${mPlusRounded.className} w-72 top-[50%] left-[30%] relative text-4xl text-light`}>HEALTHY FOOD RECIPES</h1>
+            <h1 className={`${righteous.className} w-72 top-[50%] left-[30%] relative text-4xl text-light`}>HEALTHY FOOD RECIPES</h1>
             <p className={`${rubik.className} w-72 top-[50%] left-[30%] relative text-light`}>Find easy to follow delicious recipes.</p>
             <button className={`p-2 w-32 top-[52%] left-[30%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Register</span>
@@ -53,7 +53,7 @@ const Carousel = (props: Props) => {
             <img src="./carousel/taco.jpg" alt="Taco" className="w-full h-full relative z-[-1] brightness-[.85] object-cover bottom-[148px] xl:h-auto xl:bottom-[25vh] 2xl:bottom-[45vh]" />
           </div>
           <div className="min-w-0 max-h-[65vh] flex-100">
-            <h1 className={`${mPlusRounded.className} w-72 top-[35%] left-[65%] relative text-4xl text-light`}>EASY CHEESY PASTA</h1>
+            <h1 className={`${righteous.className} w-72 top-[35%] left-[65%] relative text-4xl text-light`}>EASY CHEESY PASTA</h1>
             <p className={`${rubik.className} w-72 top-[35%] left-[65%] relative text-light`}>Simple and delicious pasta recipes.</p>
             <button className={`p-2 w-32 top-[37%] left-[65%] relative bg-pumpkin rounded-sm text-light text-xl`}>
               <span className={`${rubik.className}`}>Let&apos;s Cook</span>

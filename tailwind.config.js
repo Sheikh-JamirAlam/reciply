@@ -17,6 +17,21 @@ module.exports = {
       flex: {
         '100': '0 0 100%'
       },
+      animation: {
+        show: 'show 0.5s ease-in-out',
+        hide: 'hide 1s ease-in-out',
+      },
+      keyframes: {
+        show: {
+          '0%': { scale: '1' },
+          '50%': { scale: '0' },
+          '100%': { scale: '1' },
+        },
+        hide: {
+          '0%': { scale: '1' },
+          '100%': { scale: '0' },
+        }
+      }
     },
   },
   plugins: [],
