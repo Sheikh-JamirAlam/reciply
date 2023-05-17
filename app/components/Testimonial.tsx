@@ -15,7 +15,7 @@ const rubik = Rubik({
 });
 
 const Testimonial = () => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 80000, stopOnInteraction: false })]);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 10000, stopOnInteraction: false })]);
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
