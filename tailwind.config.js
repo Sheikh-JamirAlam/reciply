@@ -34,6 +34,10 @@ module.exports = {
       },
       boxShadow: {
         '3xl': '15px 0px 45px 0px rgba(0,0,0,0.3)',
+        '4xl': '9px 6px 15px 10px rgba(0,0,0,0.4)',
+      },
+      backgroundImage: {
+        'signup-page': "url('/signup/background.jpg')",
       },
     },
   },
