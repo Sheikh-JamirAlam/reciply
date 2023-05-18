@@ -31,7 +31,10 @@ module.exports = {
           '0%': { scale: '1' },
           '100%': { scale: '0' },
         }
-      }
+      },
+      boxShadow: {
+        '3xl': '15px 0px 45px 0px rgba(0,0,0,0.3)',
+      },
     },
   },
   plugins: [],
