@@ -93,21 +93,17 @@ const Header = () => {
           <motion.nav id="menu" className="absolute z-[2] top-0 left-0 bottom-0 h-[120%] w-[300px]" initial={false} animate={isOpen ? "open" : "closed"}>
             <motion.div className="bg-light absolute z-[2] top-0 left-0 bottom-0 w-[300px] shadow-3xl" variants={sidebar} />
             <motion.ul className="p-5 absolute z-[2] top-[100px] w-[260px]" variants={navigationVariants}>
-              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants}>
-                <span className="w-[45px] h-[45px] rounded-full"></span>
-                <span className="flex-1 h-8 rounded-lg">DISCOVER</span>
+              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">DISCOVER</span>
               </motion.li>
-              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants}>
-                <span className="w-[45px] h-[45px] rounded-full"></span>
-                <span className="flex-1 h-8 rounded-lg">MY RECIPES</span>
+              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">MY RECIPES</span>
               </motion.li>
-              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants}>
-                <span className="w-[45px] h-[45px] rounded-full"></span>
-                <span className="flex-1 h-8 rounded-lg">FOLLOWING</span>
+              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">FOLLOWING</span>
               </motion.li>
-              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants}>
-                <span className="w-[45px] h-[45px] rounded-full"></span>
-                <span className="flex-1 h-8 rounded-lg">CHAT-GPT</span>
+              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">CHAT-GPT</span>
               </motion.li>
             </motion.ul>
             <MenuToggler
