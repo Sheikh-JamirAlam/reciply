@@ -36,9 +36,15 @@ const Footer = () => {
           <p>Blog</p>
         </div>
         <div className="flex gap-2 mt-4 text-lg">
-          <BsLinkedin className="cursor-pointer" />
-          <BsTwitter className="cursor-pointer" />
-          <BsGithub className="cursor-pointer" />
+          <a href="https://www.linkedin.com/in/sheikhjamiralam">
+            <BsLinkedin />
+          </a>
+          <a href="https://twitter.com/jamirscode">
+            <BsTwitter />
+          </a>
+          <a href="https://github.com/Sheikh-JamirAlam">
+            <BsGithub />
+          </a>
         </div>
       </div>
     </section>
