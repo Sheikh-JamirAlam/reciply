@@ -64,9 +64,7 @@ const Header = () => {
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
-  const [showMenuToggleButton, setShowMenuToggleButton] = useState(() => {
-    return windowWidth >= 768 ? false : true;
-  });
+  const [showMenuToggleButton, setShowMenuToggleButton] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -75,6 +73,12 @@ const Header = () => {
       return () => {
         window.removeEventListener("resize", handleResize);
       };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.innerWidth >= 768 ? setShowMenuToggleButton(false) : setShowMenuToggleButton(true);
     }
   }, []);
 

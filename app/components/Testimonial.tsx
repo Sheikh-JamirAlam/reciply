@@ -19,9 +19,7 @@ const Testimonial = () => {
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
-  const [sliceValue, setSliceValue] = useState(() => {
-    return windowWidth >= 1040 ? 3 : 2;
-  });
+  const [sliceValue, setSliceValue] = useState(3);
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -30,6 +28,18 @@ const Testimonial = () => {
       return () => {
         window.removeEventListener("resize", handleResize);
       };
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1040) {
+        setSliceValue(3);
+      } else if (window.innerWidth >= 744) {
+        setSliceValue(2);
+      } else {
+        setSliceValue(1);
+      }
     }
   }, []);
 
