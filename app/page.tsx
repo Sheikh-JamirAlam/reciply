@@ -6,7 +6,7 @@ import Footer from "./components/Footer";
 
 export default function Home() {
   return (
-    <main id="main" className="bg-platinum h-screen">
+    <main className="bg-platinum h-screen">
       {/* Header */}
       <Header />
 
