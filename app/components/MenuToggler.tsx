@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const Path = (props: any) => <motion.path fill="transparent" strokeWidth="3" stroke="hsl(0, 0%, 18%)" strokeLinecap="round" {...props} />;
 
 export const MenuToggler = ({ toggle }: any) => (
-  <button className="border-0 outline-none focus:outline-none absolute z-[2] top-[8px] left-[24px] w-[50px] h-[50px] rounded-full" onClick={toggle}>
+  <button className="border-0 outline-none focus:outline-none absolute z-[2] top-[8px] left-[24px] w-[50px] h-[50px] rounded-full pointer-events-auto" onClick={toggle}>
     <svg width="23" height="23" viewBox="0 0 23 23">
       <Path
         variants={{

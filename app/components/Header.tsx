@@ -94,7 +94,7 @@ const Header = () => {
     <header className={rubik.className}>
       <div className="pl-20 md:pl-0 h-16 bg-light grid grid-cols-3 md:grid-cols-4 xl:grid-cols-3 place-content-evenly">
         {showMenuToggleButton && (
-          <motion.nav id="menu" className="absolute z-[2] top-0 left-0 bottom-0 h-[120%] w-[300px]" initial={false} animate={isOpen ? "open" : "closed"}>
+          <motion.nav id="menu" className="absolute z-[2] top-0 left-0 bottom-0 h-[120%] w-[300px] pointer-events-none" initial={false} animate={isOpen ? "open" : "closed"}>
             <motion.div className="bg-light absolute z-[2] top-0 left-0 bottom-0 w-[300px] shadow-3xl" variants={sidebar} />
             <motion.ul className="p-5 absolute z-[2] top-[100px] w-[260px]" variants={navigationVariants}>
               <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
@@ -115,6 +115,7 @@ const Header = () => {
                 toggleOpen();
                 document.getElementById("menu")?.classList.toggle("absolute");
                 document.getElementById("menu")?.classList.toggle("fixed");
+                document.getElementById("menu")?.classList.toggle("pointer-events-none");
               }}
             />
           </motion.nav>
