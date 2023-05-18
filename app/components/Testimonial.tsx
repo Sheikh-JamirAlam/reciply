@@ -20,11 +20,7 @@ const Testimonial = () => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
   const [sliceValue, setSliceValue] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.innerWidth >= 1040 ? 3 : 2;
-    } else {
-      return 3;
-    }
+    return windowWidth >= 1040 ? 3 : 2;
   });
 
   useEffect(() => {

@@ -65,12 +65,12 @@ const Featured = () => {
 
   return (
     <>
-      <section className="h-20 flex justify-center gap-[25vw]">
-        <div className="grid grid-flow-col gap-1 content-center">
+      <section className="h-20 flex justify-between sm:justify-center sm:gap-[25vw]">
+        <div className="max-[430px]:w-40 ml-6 sm:ml-0 grid grid-flow-col gap-1 content-center">
           <TbArrowUpBar className="my-auto text-lg text-pumpkin" />
           <p className={`${rubik.className} cursor-default`}>FEATURED PRODUCTS</p>
         </div>
-        <div className="grid grid-flow-col gap-10 content-center">
+        <div className="mr-6 sm:mr-0 grid grid-flow-col gap-5 md:gap-10 content-center">
           <motion.div className={`cursor-pointer ${selectedFilter === "all" && "font-semibold"}`} onClick={() => handleClick("all")} whileHover={{ color: "#F1721A" }}>
             ALL
             {selectedFilter === "all" && <motion.div layoutId="underline" style={{ height: "2px", backgroundColor: "#F1721A" }} />}
