@@ -89,8 +89,6 @@ export default function Home() {
         </section>
         <section className="px-6 2xs:px-12 xs:px-24 md:px-36 pb-12 grid grid-cols-2 gap-4">
           <ThemeProvider theme={theme}>
-            <TextField id="outlined-basic" label="First Name" variant="outlined" />
-            <TextField id="outlined-basic" label="Last Name" variant="outlined" />
             <TextField id="outlined-basic" label="Username" variant="outlined" className="col-span-2" />
             <FormControl className="col-span-2" variant="outlined">
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
