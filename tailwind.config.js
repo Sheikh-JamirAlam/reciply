@@ -6,6 +6,10 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    screens: {
+      '2xs': '427px',
+      'xs': '536px',
+    },
     extend: {
       colors: {
         dark: '#141414',
@@ -37,7 +41,8 @@ module.exports = {
         '4xl': '9px 6px 15px 10px rgba(0,0,0,0.4)',
       },
       backgroundImage: {
-        'signup-page': "url('/signup/background.jpg')",
+        'signup-page': "url('/signup_login/signupbg.jpg')",
+        'login-page': "url('/signup_login/loginbg.jpg')",
       },
     },
   },

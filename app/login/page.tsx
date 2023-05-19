@@ -70,20 +70,20 @@ export default function Home() {
   });
 
   return (
-    <main className="h-screen bg-signup-page bg-no-repeat bg-center bg-cover">
+    <main className="h-screen bg-login-page bg-no-repeat bg-center bg-cover">
       <div className="w-[80%] min-[1171px]:w-[60%] rounded-[40px] absolute top-[10%] left-[10%] max-[1024px]:top-[50%] max-[1024px]:left-[50%] max-[1024px]:translate-x-[-50%] max-[1024px]:translate-y-[-50%] bg-light shadow-4xl">
         <section className="pt-[3vh] px-6 2xs:px-12">
           <Image src="/logo.png" width={100} height={100} quality={100} alt="Reciply Logo" />
         </section>
         <section className="px-6 2xs:px-12 xs:px-24 md:px-36 py-[5vh]">
-          <p className="text-gray-400 font-semibold">START FOR FREE</p>
+          <p className="text-gray-400 font-semibold">WELCOME BACK</p>
           <h1 className="py-4 text-2xl font-black">
-            Create a new account<span className="text-pumpkin">.</span>
+            Log into Reciply<span className="text-pumpkin">.</span>
           </h1>
           <p className="text-gray-400">
-            Already have an account?{" "}
-            <Link href="/login" className="text-pumpkin">
-              Log in
+            Do not have an account?{" "}
+            <Link href="/signup" className="text-pumpkin">
+              Sign up
             </Link>
           </p>
         </section>
@@ -108,7 +108,7 @@ export default function Home() {
               />
             </FormControl>
             <Button variant="contained" className="w-[auto] min-[878px]:w-[40%] mt-8 mx-auto col-span-2">
-              Create Account
+              Log in
             </Button>
           </ThemeProvider>
         </section>
