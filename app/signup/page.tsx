@@ -57,6 +57,9 @@ export default function Home() {
           root: {
             "&.MuiButton-contained": {
               height: "3rem",
+              marginTop: "2rem",
+              marginLeft: "auto",
+              marginRight: "auto",
               borderRadius: "30px",
               backgroundColor: "#F1721A",
               "&:hover": {
@@ -107,7 +110,7 @@ export default function Home() {
                 label="Password"
               />
             </FormControl>
-            <Button variant="contained" className="w-[auto] min-[878px]:w-[40%] mt-8 mx-auto col-span-2">
+            <Button variant="contained" className="w-[auto] min-[878px]:w-[40%] col-span-2">
               Create Account
             </Button>
           </ThemeProvider>
