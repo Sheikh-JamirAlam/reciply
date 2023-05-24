@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { getDatabase, ref, set } from "firebase/database";
+import { getAuth, createUserWithEmailAndPassword, User } from "firebase/auth";
+import { getDatabase, ref, set, child, get } from "firebase/database";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useRouter } from "next/navigation";
 import { initFirebase } from "../firebase/config";
@@ -16,6 +16,7 @@ export default function Home() {
   const router = useRouter();
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [userName, setUserName] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
@@ -26,8 +27,9 @@ export default function Home() {
         console.log(currentUser);
 
         set(ref(database, "users/" + currentUser.uid), {
-          firstName: firstName,
-          lastName: lastName,
+          firstName,
+          lastName,
+          userName,
           email: currentUser.email,
         });
       })
@@ -36,12 +38,27 @@ export default function Home() {
       });
   };
 
+  const findUser = async (user: User) => {
+    const dbRef = ref(getDatabase());
+    await get(child(dbRef, `users/${user.uid}`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          router.push(`/${snapshot.val().userName}`);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
   if (user) {
-    router.push(`/${user.email}`);
+    findUser(user);
   }
 
-  return <SignupLogin page="signup" signup={signup} setFirstName={setFirstName} setLastName={setLastName} setEmail={setRegisterEmail} setPassword={setRegisterPassword} />;
+  return <SignupLogin page="signup" signup={signup} setUserName={setUserName} setFirstName={setFirstName} setLastName={setLastName} setEmail={setRegisterEmail} setPassword={setRegisterPassword} />;
 }

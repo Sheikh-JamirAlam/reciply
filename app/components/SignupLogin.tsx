@@ -15,6 +15,7 @@ type Props = {
   setPassword: (value: string) => void;
   setFirstName?: (value: string) => void;
   setLastName?: (value: string) => void;
+  setUserName?: (value: string) => void;
 };
 
 const SignupLogin = (props: Props) => {
@@ -120,6 +121,15 @@ const SignupLogin = (props: Props) => {
                   variant="outlined"
                   onChange={(e) => {
                     props.setLastName?.(e.target.value);
+                  }}
+                />
+                <TextField
+                  id="outlined-basic"
+                  label="Username"
+                  variant="outlined"
+                  className="col-span-2"
+                  onChange={(e) => {
+                    props.setUserName?.(e.target.value);
                   }}
                 />
               </>

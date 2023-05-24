@@ -1,5 +1,6 @@
 import { getDatabase } from "firebase/database";
 import { initFirebase } from "../firebase/config";
+import Header from "../components/Header";
 
 export default function Page({ params }: { params: { user: string } }) {
   const firebaseApp = initFirebase();
@@ -7,7 +8,7 @@ export default function Page({ params }: { params: { user: string } }) {
 
   return (
     <main className="bg-platinum h-screen">
-      <p>Welcome {params.user}!</p>
+      <Header />
     </main>
   );
 }
