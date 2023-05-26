@@ -3,6 +3,8 @@
 import { useEffect } from "react";
 import { useAuth } from "../firebase/AuthProvider";
 import Header from "../components/Header";
+import UserProfile from "../components/UserProfile";
+import RecipeList from "../components/RecipeList";
 
 export default function Page({ params }: { params: { user: string } }) {
   const { loading, currentUser, findUser } = useAuth();
@@ -17,8 +19,10 @@ export default function Page({ params }: { params: { user: string } }) {
   }
   if (currentUser) {
     return (
-      <main className="bg-platinum h-screen">
+      <main className="bg-light h-screen">
         <Header />
+        <UserProfile />
+        <RecipeList />
       </main>
     );
   }
