@@ -6,6 +6,7 @@ import { Righteous, Rubik } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
+import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -89,10 +90,14 @@ const Carousel = () => {
           </div>
         </div>
         <button className="top-[35%] left-8 absolute" onClick={scrollPrev}>
-          <BsArrowLeftCircle className="text-4xl fill-platinum" />
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <BsArrowLeftCircle className="text-4xl fill-platinum" />
+          </motion.div>
         </button>
         <button className="top-[35%] right-8 absolute" onClick={scrollNext}>
-          <BsArrowRightCircle className="text-4xl fill-platinum" />
+          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+            <BsArrowRightCircle className="text-4xl fill-platinum" />
+          </motion.div>
         </button>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { TbArrowUpBar } from "react-icons/tb";
 import { BiSortDown } from "react-icons/bi";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { FormControl, MenuItem, createTheme, ThemeProvider } from "@mui/material";
+import { motion } from "framer-motion";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
 type Recipe = {
@@ -78,7 +79,9 @@ const RecipeList = (props: Props) => {
               <p className="mt-2">{recipe.description}</p>
             </div>
             <div className="my-auto">
-              <BsArrowRightCircle className="text-3xl" />
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                <BsArrowRightCircle className="text-3xl" />
+              </motion.div>
             </div>
           </div>
           {recipe !== props.recipes[props.recipes.length - 1] && <div className="h-[2px] mx-96 bg-gray-300"></div>}
