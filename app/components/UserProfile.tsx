@@ -1,8 +1,24 @@
 import { Button, createTheme, ThemeProvider } from "@mui/material";
 
-type Props = {};
+type Recipe = {
+  title: string;
+  ingredientList: Array<string>;
+  description: string;
+  steps: Array<string>;
+  favs: number;
+  type: "veg" | "non-veg";
+};
+
+type Props = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  followers: number;
+  recipes: Array<Recipe>;
+};
 
 const UserProfile = (props: Props) => {
+  console.log(props.recipes);
   const theme = createTheme({
     components: {
       MuiButton: {
@@ -27,14 +43,16 @@ const UserProfile = (props: Props) => {
     <section className="px-[2rem] sm:px-[5rem] md:px-[3rem] lg:px-[10rem] xl:px-[15rem] 2xl:px-[20rem] py-14 grid grid-cols-3 md:grid-cols-4 bg-platinum">
       <div className="w-40 h-40 mx-auto md:mx-0 mb-8 md:mb-0 bg-gray-400 rounded-full col-span-3 md:col-span-1"></div>
       <div className="flex flex-col col-span-3 min-[400px]:col-span-2">
-        <h1 className="pt-4 max-[500px]:text-2xl text-4xl text-pumpkin font-bold">Ethan Thompson</h1>
-        <p className="">test123@gmail.com</p>
+        <h1 className="pt-4 max-[500px]:text-2xl text-4xl text-pumpkin font-bold">
+          {props.firstName} {props.lastName}
+        </h1>
+        <p className="">{props.email}</p>
         <div className="pt-5 flex gap-12">
           <p className="">
-            <span className="mr-1 font-semibold text-pumpkin">56</span>Recipes
+            <span className="mr-1 font-semibold text-pumpkin">{props.recipes ? props.recipes.length - 1 : "0"}</span>Recipes
           </p>
           <p className="">
-            <span className="mr-1 font-semibold text-pumpkin">123</span>Followers
+            <span className="mr-1 font-semibold text-pumpkin">{props.followers}</span>Followers
           </p>
         </div>
       </div>

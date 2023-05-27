@@ -8,9 +8,21 @@ import { BsArrowRightCircle } from "react-icons/bs";
 import { FormControl, MenuItem, createTheme, ThemeProvider } from "@mui/material";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 
-type Props = {};
+type Recipe = {
+  title: string;
+  ingredientList: Array<string>;
+  description: string;
+  steps: Array<string>;
+  favs: number;
+  type: "veg" | "non-veg";
+};
+
+type Props = {
+  recipes: Array<Recipe>;
+};
 
 const RecipeList = (props: Props) => {
+  console.log(props.recipes);
   const [age, setAge] = useState("1");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -57,51 +69,21 @@ const RecipeList = (props: Props) => {
         </div>
       </div>
       <div className="h-[2px] mx-32 bg-gray-300"></div>
-
-      <div className="mx-60 py-8 flex justify-between">
-        <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
-        <div className="w-[70%] my-auto">
-          <h3 className="text-xl font-semibold">Ramen</h3>
-          <p className="mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen bo .....
-          </p>
-        </div>
-        <div className="my-auto">
-          <BsArrowRightCircle className="text-3xl" />
-        </div>
-      </div>
-      <div className="h-[2px] mx-96 bg-gray-300"></div>
-
-      <div className="mx-60 py-8 flex justify-between">
-        <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
-        <div className="w-[70%] my-auto">
-          <h3 className="text-xl font-semibold">Ramen</h3>
-          <p className="mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen bo .....
-          </p>
-        </div>
-        <div className="my-auto">
-          <BsArrowRightCircle className="text-3xl" />
-        </div>
-      </div>
-      <div className="h-[2px] mx-96 bg-gray-300"></div>
-
-      <div className="mx-60 py-8 flex justify-between">
-        <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
-        <div className="w-[70%] my-auto">
-          <h3 className="text-xl font-semibold">Ramen</h3>
-          <p className="mt-2">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a
-            galley of type and scrambled it to make a type specimen bo .....
-          </p>
-        </div>
-        <div className="my-auto">
-          <BsArrowRightCircle className="text-3xl" />
-        </div>
-      </div>
-      <div className="h-[2px] mx-96 bg-gray-300"></div>
+      {props.recipes.map((recipe) => (
+        <>
+          <div className="mx-60 py-8 flex justify-between">
+            <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
+            <div className="w-[70%] my-auto">
+              <h3 className="text-xl font-semibold">{recipe.title}</h3>
+              <p className="mt-2">{recipe.description}</p>
+            </div>
+            <div className="my-auto">
+              <BsArrowRightCircle className="text-3xl" />
+            </div>
+          </div>
+          {recipe !== props.recipes[props.recipes.length - 1] && <div className="h-[2px] mx-96 bg-gray-300"></div>}
+        </>
+      ))}
     </section>
   );
 };

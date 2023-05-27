@@ -14,6 +14,7 @@ export function useAuth() {
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<any>();
+  const [userDetails, setUserDetails] = useState<any>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -38,6 +39,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           lastName,
           userName,
           email: createdUser.email,
+          followers: 0,
+          recipes: {},
         });
       })
       .catch((error) => {
@@ -67,10 +70,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const findUser = async (user: User) => {
-    console.log(user);
     await get(child(ref(db), `users/${user.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
+          setUserDetails(snapshot.val());
           router.push(`/${snapshot.val().userName}`);
         } else {
           console.log("No data available");
@@ -81,5 +84,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser }}>{loading ? null : children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails }}>{loading ? null : children}</AuthContext.Provider>;
 };
