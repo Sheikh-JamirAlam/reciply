@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { Rubik } from "next/font/google";
@@ -61,6 +62,7 @@ const menuItemVariants: Variants = {
 };
 
 const Header = () => {
+  const router = useRouter();
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
@@ -122,7 +124,17 @@ const Header = () => {
           </motion.nav>
         )}
         <section className="col-span-2 md:col-span-1">
-          <Image className="mx-auto" src="/logo.png" width={100} height={100} quality={100} alt="Reciply Logo" />
+          <Image
+            className="mx-auto cursor-pointer"
+            src="/logo.png"
+            width={100}
+            height={100}
+            quality={100}
+            alt="Reciply Logo"
+            onClick={() => {
+              router.push("/");
+            }}
+          />
         </section>
         {!showMenuToggleButton && (
           <section className="col-span-2 xl:col-span-1 flex justify-between items-center">
