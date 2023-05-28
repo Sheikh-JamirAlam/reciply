@@ -3,7 +3,7 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { ref, set, get, child } from "firebase/database";
+import { ref, set, push, get, child, update } from "firebase/database";
 import { auth, db } from "./config";
 
 const AuthContext = createContext<any>({});
@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           userName,
           email: createdUser.email,
           followers: 0,
-          recipes: {},
+          recipes: [],
         });
       })
       .catch((error) => {
@@ -84,5 +84,37 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails }}>{loading ? null : children}</AuthContext.Provider>;
+  const addRecipes = async (author: string, title: string, ingredientList: Array<string>, description: string, steps: Array<string>, category: string) => {
+    const recipeRef = push(ref(db, "recipes"));
+    await set(recipeRef, {
+      author,
+      title,
+      ingredientList,
+      description,
+      steps,
+      likes: 0,
+      category,
+    });
+    const recipeId = recipeRef.key;
+    await get(child(ref(db), `users/${currentUser.uid}/recipes`))
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          if (snapshot.val() === false) {
+            const updates = { 0: recipeId };
+            update(ref(db, `users/${currentUser.uid}/recipes`), updates);
+          } else {
+            const recipes = [...snapshot.val(), recipeId];
+            const updates = { recipes };
+            update(ref(db, `users/${currentUser.uid}`), updates);
+          }
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+
+  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes }}>{loading ? null : children}</AuthContext.Provider>;
 };
