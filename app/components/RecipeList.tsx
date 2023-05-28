@@ -76,11 +76,11 @@ const RecipeList = (props: Props) => {
             <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
             <div className="w-[70%] my-auto">
               <h3 className="text-xl font-semibold">{recipe.title}</h3>
-              <p className="mt-2">{recipe.description}</p>
+              <p className="mt-2">{recipe.description.length > 250 ? recipe.description.slice(0, 250) + "..." : recipe.description}</p>
             </div>
             <div className="my-auto">
               <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <BsArrowRightCircle className="text-3xl" />
+                <BsArrowRightCircle className="text-3xl cursor-pointer" />
               </motion.div>
             </div>
           </div>
