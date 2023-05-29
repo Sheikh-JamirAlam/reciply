@@ -70,12 +70,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  const findUser = async (user: User) => {
+  const findUser = async (user: User, page: string) => {
     await get(child(ref(db), `users/${user.uid}`))
       .then((snapshot) => {
         if (snapshot.exists()) {
           setUserDetails(snapshot.val());
-          router.push(`/${snapshot.val().userName}`);
+          if (page === "create") {
+            router.push(`/${snapshot.val().userName}/create`);
+          } else {
+            router.push(`/${snapshot.val().userName}`);
+          }
         } else {
           console.log("No data available");
         }

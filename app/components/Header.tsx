@@ -9,6 +9,7 @@ import { motion, useCycle, Variants } from "framer-motion";
 import { IoSearch } from "react-icons/io5";
 import { FaRegUserCircle } from "react-icons/fa";
 import { MenuToggler } from "./MenuToggler";
+import { useAuth } from "../firebase/AuthProvider";
 
 const rubik = Rubik({
   subsets: ["latin"],
@@ -63,6 +64,7 @@ const menuItemVariants: Variants = {
 
 const Header = () => {
   const router = useRouter();
+  const { currentUser, findUser } = useAuth();
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
@@ -104,13 +106,13 @@ const Header = () => {
                 <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">DISCOVER</span>
               </motion.li>
               <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">MY RECIPES</span>
-              </motion.li>
-              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">FOLLOWING</span>
               </motion.li>
               <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
                 <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">CHAT-GPT</span>
+              </motion.li>
+              <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">CREATE</span>
               </motion.li>
             </motion.ul>
             <MenuToggler
@@ -138,10 +140,17 @@ const Header = () => {
         </section>
         {!showMenuToggleButton && (
           <section className="col-span-2 xl:col-span-1 flex justify-between items-center">
-            <span>DISCOVER</span>
-            <span>MY RECIPES</span>
-            <span>FOLLOWING</span>
-            <span>CHAT-GPT</span>
+            <span className="cursor-pointer">DISCOVER</span>
+            <span className="cursor-pointer">FOLLOWING</span>
+            <span className="cursor-pointer">CHAT-GPT</span>
+            <span
+              className="cursor-pointer"
+              onClick={() => {
+                findUser(currentUser, "create");
+              }}
+            >
+              CREATE
+            </span>
           </section>
         )}
         <section className="xl:mr-40 flex gap-8 place-content-center items-center">

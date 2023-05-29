@@ -22,7 +22,7 @@ export default function Home() {
 
   useEffect(() => {
     if (currentUser) {
-      findUser(currentUser);
+      findUser(currentUser, "signup");
     }
   }, [currentUser]); // eslint-disable-line react-hooks/exhaustive-deps
 

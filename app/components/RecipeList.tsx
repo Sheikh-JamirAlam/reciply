@@ -50,14 +50,14 @@ const RecipeList = (props: Props) => {
 
   return (
     <section className="bg-light">
-      <div className="mx-60 py-8 flex justify-between">
-        <div className="max-[430px]:w-40 ml-6 sm:ml-0 grid grid-flow-col gap-1 content-center">
+      <div className="max-[440px]:mx-2 mx-10 md:mx-20 lg:mx-40 xl:mx-60 py-8 flex justify-between">
+        <div className="grid grid-flow-col gap-1 content-center">
           <TbArrowUpBar className="my-auto text-lg text-pumpkin" />
           <p className="font-bold text-lg cursor-default">RECIPES</p>
         </div>
-        <div className="max-[430px]:w-40 ml-6 sm:ml-0 grid grid-flow-col gap-3 content-center">
+        <div className="grid grid-flow-col gap-3 max-[440px]:gap-1 content-center">
           <BiSortDown className="my-auto text-xl text-pumpkin" />
-          <p className="my-auto font-bold text-lg cursor-default">SORT BY</p>
+          <p className="my-auto font-bold text-lg cursor-default hidden sm:block">SORT BY</p>
           <ThemeProvider theme={theme}>
             <FormControl variant="standard" sx={{ m: 1, minWidth: 155 }}>
               <Select labelId="demo-simple-select-standard-label" id="demo-simple-select-standard" value={age} onChange={handleChange} label="Age">
@@ -68,23 +68,23 @@ const RecipeList = (props: Props) => {
           </ThemeProvider>
         </div>
       </div>
-      <div className="h-[2px] mx-32 bg-gray-300"></div>
+      <div className="h-[2px] mx-16 sm:mx-32 bg-gray-300"></div>
       {typeof props.recipes !== "boolean" &&
         props.recipes?.map((recipe, index) => (
           <div key={index}>
-            <div className="mx-60 py-8 flex justify-between">
-              <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
-              <div className="w-[70%] my-auto">
-                <h3 className="text-xl font-semibold">{recipe.title}</h3>
+            <div className="max-[400px]:mx-2 mx-8 md:mx-20 lg:mx-40 xl:mx-60 py-8 flex justify-between">
+              <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" className="max-[570px]:w-24" />
+              <div className="w-[60%] md:w-[70%] my-auto">
+                <h3 className="max-[570px]:text-lg text-xl font-semibold">{recipe.title}</h3>
                 <p className="mt-2">{recipe.description.length > 250 ? recipe.description.slice(0, 250) + "..." : recipe.description}</p>
               </div>
               <div className="my-auto">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <BsArrowRightCircle className="text-3xl cursor-pointer" />
+                  <BsArrowRightCircle className="max-[570px]:text-2xl text-3xl cursor-pointer" />
                 </motion.div>
               </div>
             </div>
-            {recipe !== (Array.isArray(props.recipes) && props.recipes[props.recipes.length - 1]) && <div className="h-[2px] mx-96 bg-gray-300"></div>}
+            {recipe !== (Array.isArray(props.recipes) && props.recipes[props.recipes.length - 1]) && <div className="h-[2px] mx-32 sm:mx-56 md:mx-72 xl:mx-96 bg-gray-300"></div>}
           </div>
         ))}
     </section>
