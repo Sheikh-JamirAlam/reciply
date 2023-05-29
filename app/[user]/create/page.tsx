@@ -23,13 +23,13 @@ export default function Page({ params }: { params: { user: string } }) {
   }
   if (currentUser) {
     return (
-      <main className="bg-platinum h-screen">
+      <main className="bg-platinum h-auto sm:h-screen">
         <Header />
-        <section className="flex">
-          <section className="w-[70%] p-12 pt-16 bg-platinum grid gap-6">
+        <section className="flex flex-col sm:flex-row">
+          <section className="sm:w-[60%] lg:w-[70%] p-12 pt-16 bg-platinum grid gap-6">
             <input
               type="text"
-              className="w-1/4 text-3xl font-semibold bg-platinum outline-none"
+              className="w-1/3 lg:w-1/4 text-3xl font-semibold bg-platinum outline-none"
               placeholder="TITLE"
               value={title}
               onChange={(e) => {
@@ -73,7 +73,7 @@ export default function Page({ params }: { params: { user: string } }) {
               />
             </div>
           </section>
-          <section className="w-[30%] p-8 pt-16">
+          <section className="sm:w-[40%] lg:w-[30%] p-8 pt-16">
             <CategoryButton categoryButton={categoryButton} setCategoryButton={setCategoryButton} />
             <div className="h-48 w-48 mx-auto mt-20 bg-gray-300"></div>
             <Box sx={{ "& > :not(style)": { m: 1 }, marginTop: "4rem", display: "flex", justifyContent: "center" }}>
