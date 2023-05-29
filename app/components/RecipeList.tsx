@@ -19,11 +19,10 @@ type Recipe = {
 };
 
 type Props = {
-  recipes: Array<Recipe>;
+  recipes: Array<Recipe> | boolean;
 };
 
 const RecipeList = (props: Props) => {
-  console.log(props.recipes);
   const [age, setAge] = useState("1");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -70,23 +69,24 @@ const RecipeList = (props: Props) => {
         </div>
       </div>
       <div className="h-[2px] mx-32 bg-gray-300"></div>
-      {props.recipes.map((recipe) => (
-        <>
-          <div className="mx-60 py-8 flex justify-between">
-            <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
-            <div className="w-[70%] my-auto">
-              <h3 className="text-xl font-semibold">{recipe.title}</h3>
-              <p className="mt-2">{recipe.description.length > 250 ? recipe.description.slice(0, 250) + "..." : recipe.description}</p>
+      {typeof props.recipes !== "boolean" &&
+        props.recipes?.map((recipe, index) => (
+          <div key={index}>
+            <div className="mx-60 py-8 flex justify-between">
+              <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" />
+              <div className="w-[70%] my-auto">
+                <h3 className="text-xl font-semibold">{recipe.title}</h3>
+                <p className="mt-2">{recipe.description.length > 250 ? recipe.description.slice(0, 250) + "..." : recipe.description}</p>
+              </div>
+              <div className="my-auto">
+                <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
+                  <BsArrowRightCircle className="text-3xl cursor-pointer" />
+                </motion.div>
+              </div>
             </div>
-            <div className="my-auto">
-              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <BsArrowRightCircle className="text-3xl cursor-pointer" />
-              </motion.div>
-            </div>
+            {recipe !== (Array.isArray(props.recipes) && props.recipes[props.recipes.length - 1]) && <div className="h-[2px] mx-96 bg-gray-300"></div>}
           </div>
-          {recipe !== props.recipes[props.recipes.length - 1] && <div className="h-[2px] mx-96 bg-gray-300"></div>}
-        </>
-      ))}
+        ))}
     </section>
   );
 };

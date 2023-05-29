@@ -15,6 +15,7 @@ export function useAuth() {
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<any>();
   const [userDetails, setUserDetails] = useState<any>();
+  const [recipeList, setRecipeList] = useState<any>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           userName,
           email: createdUser.email,
           followers: 0,
-          recipes: [],
+          recipes: false,
         });
       })
       .catch((error) => {
@@ -85,7 +86,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const addRecipes = async (author: string, title: string, ingredientList: Array<string>, description: string, steps: Array<string>, category: string) => {
-    const recipeRef = push(ref(db, "recipes"));
+    const recipeRef = push(ref(db, `users/${currentUser.uid}/recipes`));
     await set(recipeRef, {
       author,
       title,
@@ -95,18 +96,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       likes: 0,
       category,
     });
-    const recipeId = recipeRef.key;
-    await get(child(ref(db), `users/${currentUser.uid}/recipes`))
+  };
+
+  const getRecipes = async (user: User) => {
+    get(child(ref(db), `users/${user.uid}/recipes`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          if (snapshot.val() === false) {
-            const updates = { 0: recipeId };
-            update(ref(db, `users/${currentUser.uid}/recipes`), updates);
-          } else {
-            const recipes = [...snapshot.val(), recipeId];
-            const updates = { recipes };
-            update(ref(db, `users/${currentUser.uid}`), updates);
-          }
+          setRecipeList(Object.values(snapshot.val()));
         } else {
           console.log("No data available");
         }
@@ -116,5 +112,5 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes }}>{loading ? null : children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes, getRecipes, recipeList }}>{loading ? null : children}</AuthContext.Provider>;
 };

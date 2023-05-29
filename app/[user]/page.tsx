@@ -7,11 +7,12 @@ import UserProfile from "../components/UserProfile";
 import RecipeList from "../components/RecipeList";
 
 export default function Page({ params }: { params: { user: string } }) {
-  const { loading, currentUser, findUser, userDetails } = useAuth();
+  const { loading, currentUser, findUser, userDetails, getRecipes, recipeList } = useAuth();
 
   useEffect(() => {
     if (currentUser) {
       findUser(currentUser);
+      getRecipes(currentUser);
     }
   }, [currentUser]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -22,8 +23,8 @@ export default function Page({ params }: { params: { user: string } }) {
     return (
       <main className="bg-light h-screen">
         <Header />
-        <UserProfile firstName={userDetails?.firstName} lastName={userDetails?.lastName} email={userDetails?.email} followers={userDetails?.followers} recipes={userDetails?.recipes} />
-        <RecipeList recipes={userDetails?.recipes} />
+        <UserProfile firstName={userDetails?.firstName} lastName={userDetails?.lastName} email={userDetails?.email} followers={userDetails?.followers} recipes={recipeList?.length} />
+        <RecipeList recipes={recipeList} />
       </main>
     );
   }

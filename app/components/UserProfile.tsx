@@ -1,24 +1,14 @@
 import { Button, createTheme, ThemeProvider } from "@mui/material";
 
-type Recipe = {
-  title: string;
-  ingredientList: Array<string>;
-  description: string;
-  steps: Array<string>;
-  favs: number;
-  type: "veg" | "non-veg";
-};
-
 type Props = {
   firstName: string;
   lastName: string;
   email: string;
   followers: number;
-  recipes: Array<Recipe>;
+  recipes: number;
 };
 
 const UserProfile = (props: Props) => {
-  console.log(props.recipes);
   const theme = createTheme({
     components: {
       MuiButton: {
@@ -49,7 +39,7 @@ const UserProfile = (props: Props) => {
         <p className="">{props.email}</p>
         <div className="pt-5 flex gap-12">
           <p className="">
-            <span className="mr-1 font-semibold text-pumpkin">{props.recipes ? props.recipes.length - 1 : "0"}</span>Recipes
+            <span className="mr-1 font-semibold text-pumpkin">{props.recipes}</span>Recipes
           </p>
           <p className="">
             <span className="mr-1 font-semibold text-pumpkin">{props.followers}</span>Followers
