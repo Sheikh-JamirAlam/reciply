@@ -112,7 +112,14 @@ const Header = () => {
                 <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">CHAT-GPT</span>
               </motion.li>
               <motion.li className="flex items-center mb-5 space-x-6 cursor-pointer" variants={menuItemVariants} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                <span className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg">CREATE</span>
+                <span
+                  className="ml-[4.5rem] pt-3 flex-1 h-8 rounded-lg"
+                  onClick={() => {
+                    findUser(currentUser, "create");
+                  }}
+                >
+                  CREATE
+                </span>
               </motion.li>
             </motion.ul>
             <MenuToggler

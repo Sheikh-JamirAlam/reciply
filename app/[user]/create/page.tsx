@@ -49,11 +49,23 @@ export default function Page({ params }: { params: { user: string } }) {
             <div>
               <p className="text-lg font-semibold">Ingredient List:</p>
               <TextareaAutosize
+                id="ingredients"
                 aria-label="empty textarea"
                 placeholder={`EXAMPLE:-\n1. Noodles\n2. Salt`}
                 className="w-full bg-platinum outline-none resize-none"
                 minRows={6}
                 value={ingredientList}
+                onKeyDown={(e) => {
+                  if (ingredientList === "") {
+                    if (/^[a-zA-Z0-9]$/.test(e.key)) {
+                      setIngredientList("1. ");
+                    }
+                  }
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    setIngredientList((prevValue) => prevValue + "\n" + (prevValue.split("\n").length + 1) + ". ");
+                  }
+                }}
                 onChange={(e) => {
                   setIngredientList(e.target.value);
                 }}
@@ -67,6 +79,17 @@ export default function Page({ params }: { params: { user: string } }) {
                 className="w-full bg-platinum outline-none resize-none"
                 minRows={6}
                 value={steps}
+                onKeyDown={(e) => {
+                  if (steps === "") {
+                    if (/^[a-zA-Z0-9]$/.test(e.key)) {
+                      setSteps("1. ");
+                    }
+                  }
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                    setSteps((prevValue) => prevValue + "\n" + (prevValue.split("\n").length + 1) + ". ");
+                  }
+                }}
                 onChange={(e) => {
                   setSteps(e.target.value);
                 }}
@@ -83,11 +106,19 @@ export default function Page({ params }: { params: { user: string } }) {
                 variant="extended"
                 aria-label="add"
                 onClick={async () => {
-                  const ar1 = [ingredientList];
-                  const ar2 = [steps];
-                  const category = categoryButton ? "non-veg" : "veg";
-                  await addRecipes(params.user, title, ar1, description, ar2, category);
-                  router.push(`/${params.user}`);
+                  const regex = /^\d+\.\s(.*)$/gm;
+                  const testRegex = /^(\d+\.\s.*\n)*\d+\.\s.*$/;
+                  if (testRegex.test(ingredientList) && testRegex.test(steps)) {
+                    const ingredientFound = ingredientList.match(regex);
+                    const extractedIngredientList = ingredientFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
+                    const stepsFound = steps.match(regex);
+                    const extractedSteps = stepsFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
+                    const category = categoryButton ? "non-veg" : "veg";
+                    await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
+                    router.push(`/${params.user}`);
+                  } else {
+                    console.log("Thats stupid");
+                  }
                 }}
               >
                 <AddIcon />
