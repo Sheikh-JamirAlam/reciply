@@ -16,6 +16,7 @@ export default function Page({ params }: { params: { user: string } }) {
   const [ingredientList, setIngredientList] = useState("");
   const [steps, setSteps] = useState("");
   const [categoryButton, setCategoryButton] = useState(false);
+  const [showWarningTextBox, setShowWarningTextBox] = useState({ target: "", state: false });
   const router = useRouter();
 
   if (loading) {
@@ -47,7 +48,9 @@ export default function Page({ params }: { params: { user: string } }) {
               }}
             />
             <div>
-              <p className="text-lg font-semibold">Ingredient List:</p>
+              <p className={`text-lg font-semibold ${showWarningTextBox.state && showWarningTextBox.target === "ingredientList" && "underline decoration-2 decoration-solid decoration-red-600"}`}>
+                Ingredient List:
+              </p>
               <TextareaAutosize
                 id="ingredients"
                 aria-label="empty textarea"
@@ -67,12 +70,15 @@ export default function Page({ params }: { params: { user: string } }) {
                   }
                 }}
                 onChange={(e) => {
+                  setShowWarningTextBox({ target: "", state: false });
                   setIngredientList(e.target.value);
                 }}
               />
             </div>
             <div>
-              <p className="text-lg font-semibold">Steps to make:</p>
+              <p className={`text-lg font-semibold ${showWarningTextBox.state && showWarningTextBox.target === "steps" && "underline decoration-2 decoration-solid decoration-red-600"}`}>
+                Steps to make:
+              </p>
               <TextareaAutosize
                 aria-label="empty textarea"
                 placeholder={`EXAMPLE:-\n1. Prepare the broth\n2. Cook the noodles`}
@@ -91,6 +97,7 @@ export default function Page({ params }: { params: { user: string } }) {
                   }
                 }}
                 onChange={(e) => {
+                  setShowWarningTextBox({ target: "", state: false });
                   setSteps(e.target.value);
                 }}
               />
@@ -108,16 +115,20 @@ export default function Page({ params }: { params: { user: string } }) {
                 onClick={async () => {
                   const regex = /^\d+\.\s(.*)$/gm;
                   const testRegex = /^(\d+\.\s.*\n)*\d+\.\s.*$/;
-                  if (testRegex.test(ingredientList) && testRegex.test(steps)) {
-                    const ingredientFound = ingredientList.match(regex);
-                    const extractedIngredientList = ingredientFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
-                    const stepsFound = steps.match(regex);
-                    const extractedSteps = stepsFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
-                    const category = categoryButton ? "non-veg" : "veg";
-                    await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
-                    router.push(`/${params.user}`);
+                  if (testRegex.test(ingredientList)) {
+                    if (testRegex.test(steps)) {
+                      const ingredientFound = ingredientList.match(regex);
+                      const extractedIngredientList = ingredientFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
+                      const stepsFound = steps.match(regex);
+                      const extractedSteps = stepsFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
+                      const category = categoryButton ? "non-veg" : "veg";
+                      await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
+                      router.push(`/${params.user}`);
+                    } else {
+                      setShowWarningTextBox({ target: "steps", state: true });
+                    }
                   } else {
-                    console.log("Thats stupid");
+                    setShowWarningTextBox({ target: "ingredientList", state: true });
                   }
                 }}
               >

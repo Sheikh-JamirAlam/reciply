@@ -77,6 +77,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           setUserDetails(snapshot.val());
           if (page === "create") {
             router.push(`/${snapshot.val().userName}/create`);
+          } else if (page === "onlyGetUser") {
+            console.log("User details set.");
           } else {
             router.push(`/${snapshot.val().userName}`);
           }

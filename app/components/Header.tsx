@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { Rubik } from "next/font/google";
 import { motion, useCycle, Variants } from "framer-motion";
 import { IoSearch } from "react-icons/io5";
@@ -64,12 +63,16 @@ const menuItemVariants: Variants = {
 
 const Header = () => {
   const router = useRouter();
-  const { currentUser, findUser } = useAuth();
+  const { currentUser, findUser, userDetails } = useAuth();
   const [isOpen, toggleOpen] = useCycle(false, true);
   const [windowWidth, setWindowWidth] = useState(() => {
     return typeof window !== "undefined" ? window.innerWidth : 0;
   });
   const [showMenuToggleButton, setShowMenuToggleButton] = useState(false);
+
+  useEffect(() => {
+    findUser(currentUser, "onlyGetUser");
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -162,9 +165,12 @@ const Header = () => {
         )}
         <section className="xl:mr-40 flex gap-8 place-content-center items-center">
           <IoSearch className="text-lg" />
-          <Link href="/signup" prefetch={false}>
-            <FaRegUserCircle className="text-lg" />
-          </Link>
+          <FaRegUserCircle
+            className="text-lg cursor-pointer"
+            onClick={() => {
+              currentUser ? router.push(`/${userDetails.userName}`) : router.push("/signup");
+            }}
+          />
         </section>
       </div>
     </header>
