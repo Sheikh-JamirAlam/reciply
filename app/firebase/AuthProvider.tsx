@@ -4,7 +4,8 @@ import { useState, createContext, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { ref, set, push, get, child, update } from "firebase/database";
-import { auth, db } from "./config";
+import { getStorage, uploadBytes, ref as refStorage } from "firebase/storage";
+import { auth, db, storage } from "./config";
 
 const AuthContext = createContext<any>({});
 
@@ -118,5 +119,18 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       });
   };
 
-  return <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes, getRecipes, recipeList }}>{loading ? null : children}</AuthContext.Provider>;
+  const addPicture = async (image: string, title: string) => {
+    const storageRef = refStorage(storage, `${currentUser.uid}/recipes/${title}`);
+    const response = await fetch(image);
+    const blob = await response.blob();
+    uploadBytes(storageRef, blob).then((snapshot) => {
+      console.log("Uploaded a blob or file!");
+    });
+  };
+
+  return (
+    <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes, getRecipes, recipeList, addPicture }}>
+      {loading ? null : children}
+    </AuthContext.Provider>
+  );
 };

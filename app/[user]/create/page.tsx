@@ -3,20 +3,22 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import TextareaAutosize from "@mui/base/TextareaAutosize";
-import { useAuth } from "../../firebase/AuthProvider";
-import Header from "../../components/Header";
+import { useAuth } from "@/app/firebase/AuthProvider";
+import Header from "@/app/components/Header";
 import { Box, Fab } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import CategoryButton from "../../components/CategoryButton";
+import CategoryButton from "@/app/components/CategoryButton";
+import ImageUpload from "@/app/components/ImageUpload";
 
 export default function Page({ params }: { params: { user: string } }) {
-  const { loading, currentUser, addRecipes } = useAuth();
+  const { loading, currentUser, addRecipes, addPicture } = useAuth();
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [ingredientList, setIngredientList] = useState("");
   const [steps, setSteps] = useState("");
   const [categoryButton, setCategoryButton] = useState(false);
   const [showWarningTextBox, setShowWarningTextBox] = useState({ target: "", state: false });
+  const [imageUrl, setImageUrl] = useState("");
   const router = useRouter();
 
   if (loading) {
@@ -105,7 +107,8 @@ export default function Page({ params }: { params: { user: string } }) {
           </section>
           <section className="sm:w-[40%] lg:w-[30%] p-8 pt-16">
             <CategoryButton categoryButton={categoryButton} setCategoryButton={setCategoryButton} />
-            <div className="h-48 w-48 mx-auto mt-20 bg-gray-300"></div>
+            <ImageUpload imageUrl={imageUrl} setImageUrl={setImageUrl} />
+            {/* <div className="h-48 w-48 mx-auto mt-20 bg-gray-300"></div> */}
             <Box sx={{ "& > :not(style)": { m: 1 }, marginTop: "4rem", display: "flex", justifyContent: "center" }}>
               <Fab
                 sx={{ backgroundColor: "#FA9146", "&:hover": { backgroundColor: "#F1721A" } }}
@@ -123,6 +126,7 @@ export default function Page({ params }: { params: { user: string } }) {
                       const extractedSteps = stepsFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
                       const category = categoryButton ? "non-veg" : "veg";
                       await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
+                      await addPicture(imageUrl, title);
                       router.push(`/${params.user}`);
                     } else {
                       setShowWarningTextBox({ target: "steps", state: true });
