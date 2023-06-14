@@ -21,8 +21,8 @@ const ImageUpload = (props: Props) => {
   };
 
   return (
-    <div onClick={handleImageUpload} className="h-48 w-48 mx-auto mt-20 bg-gray-300">
-      <img src={props.imageUrl !== "" ? props.imageUrl : ""} alt="" className="h-48 w-48 object-cover" />
+    <div onClick={handleImageUpload} className="h-48 w-48 mx-auto mt-20 bg-gray-300 cursor-pointer hover:brightness-95">
+      <img src={props.imageUrl !== "" ? props.imageUrl : ""} alt="" className={`h-48 w-48 object-cover ${props.imageUrl === "" && "hidden"} hover:brightness-95`} />
       <input type="file" ref={inputRef} onChange={handleImageChange} style={{ display: "none" }} />
     </div>
   );

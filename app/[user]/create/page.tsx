@@ -108,7 +108,6 @@ export default function Page({ params }: { params: { user: string } }) {
           <section className="sm:w-[40%] lg:w-[30%] p-8 pt-16">
             <CategoryButton categoryButton={categoryButton} setCategoryButton={setCategoryButton} />
             <ImageUpload imageUrl={imageUrl} setImageUrl={setImageUrl} />
-            {/* <div className="h-48 w-48 mx-auto mt-20 bg-gray-300"></div> */}
             <Box sx={{ "& > :not(style)": { m: 1 }, marginTop: "4rem", display: "flex", justifyContent: "center" }}>
               <Fab
                 sx={{ backgroundColor: "#FA9146", "&:hover": { backgroundColor: "#F1721A" } }}
@@ -125,8 +124,8 @@ export default function Page({ params }: { params: { user: string } }) {
                       const stepsFound = steps.match(regex);
                       const extractedSteps = stepsFound?.map((eachLine) => eachLine.replace(/^\d+\.\s/, ""));
                       const category = categoryButton ? "non-veg" : "veg";
-                      await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
                       await addPicture(imageUrl, title);
+                      await addRecipes(params.user, title, extractedIngredientList, description, extractedSteps, category);
                       router.push(`/${params.user}`);
                     } else {
                       setShowWarningTextBox({ target: "steps", state: true });

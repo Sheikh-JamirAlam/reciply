@@ -3,8 +3,8 @@
 import { useState, createContext, useContext, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { User, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { ref, set, push, get, child, update } from "firebase/database";
-import { getStorage, uploadBytes, ref as refStorage } from "firebase/storage";
+import { ref, set, push, get, child } from "firebase/database";
+import { uploadBytes, ref as refStorage, getDownloadURL } from "firebase/storage";
 import { auth, db, storage } from "./config";
 
 const AuthContext = createContext<any>({});
@@ -93,22 +93,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const addRecipes = async (author: string, title: string, ingredientList: Array<string>, description: string, steps: Array<string>, category: string) => {
-    const recipeRef = push(ref(db, `users/${currentUser.uid}/recipes`));
-    await set(recipeRef, {
-      author,
-      title,
-      ingredientList,
-      description,
-      steps,
-      likes: 0,
-      category,
-    });
+    await getDownloadURL(refStorage(storage, `${currentUser.uid}/recipes/${title}`))
+      .then((url) => {
+        const recipeRef = push(ref(db, `users/${currentUser.uid}/recipes`));
+        set(recipeRef, {
+          author,
+          title,
+          ingredientList,
+          description,
+          steps,
+          likes: 0,
+          category,
+          url,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const getRecipes = async (user: User) => {
     get(child(ref(db), `users/${user.uid}/recipes`))
       .then((snapshot) => {
         if (snapshot.exists()) {
+          console.log(Object.values(snapshot.val()));
           setRecipeList(Object.values(snapshot.val()));
         } else {
           console.log("No data available");
@@ -123,9 +131,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     const storageRef = refStorage(storage, `${currentUser.uid}/recipes/${title}`);
     const response = await fetch(image);
     const blob = await response.blob();
-    uploadBytes(storageRef, blob).then((snapshot) => {
-      console.log("Uploaded a blob or file!");
-    });
+    await uploadBytes(storageRef, blob)
+      .then((snapshot) => {
+        console.log("Uploaded image.");
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (

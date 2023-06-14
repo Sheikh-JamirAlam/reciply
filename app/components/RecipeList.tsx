@@ -13,6 +13,7 @@ type Recipe = {
   title: string;
   ingredientList: Array<string>;
   description: string;
+  url: string;
   steps: Array<string>;
   favs: number;
   type: "veg" | "non-veg";
@@ -73,7 +74,9 @@ const RecipeList = (props: Props) => {
         props.recipes?.map((recipe, index) => (
           <div key={index}>
             <div className="max-[400px]:mx-2 mx-8 md:mx-20 lg:mx-40 xl:mx-60 py-8 flex justify-between">
-              <Image src="/user/profile.png" width={150} height={150} alt="User Profile Picture" className="max-[570px]:w-24" />
+              <div className="h-[150px] w-[150px] max-[570px]:h-24 max-[570px]:w-24">
+                <Image src={recipe.url} width={150} height={150} alt="User Profile Picture" className="h-[150px] w-[150px] max-[570px]:h-24 max-[570px]:w-24 object-cover" />
+              </div>
               <div className="w-[60%] md:w-[70%] my-auto">
                 <h3 className="max-[570px]:text-lg text-xl font-semibold">{recipe.title}</h3>
                 <p className="mt-2">{recipe.description.length > 250 ? recipe.description.slice(0, 250) + "..." : recipe.description}</p>

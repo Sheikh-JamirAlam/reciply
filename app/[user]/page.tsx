@@ -11,7 +11,7 @@ export default function Page({ params }: { params: { user: string } }) {
 
   useEffect(() => {
     if (currentUser) {
-      findUser(currentUser);
+      findUser(currentUser, "onlyGetUser");
       getRecipes(currentUser);
     }
   }, [currentUser]); // eslint-disable-line react-hooks/exhaustive-deps
