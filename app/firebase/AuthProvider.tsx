@@ -17,6 +17,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<any>();
   const [userDetails, setUserDetails] = useState<any>();
   const [recipeList, setRecipeList] = useState<any>();
+  const [recipeIdList, setRecipeIdList] = useState<any>();
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -116,7 +117,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     get(child(ref(db), `users/${user.uid}/recipes`))
       .then((snapshot) => {
         if (snapshot.exists()) {
-          console.log(Object.values(snapshot.val()));
+          setRecipeIdList(Object.keys(snapshot.val()));
           setRecipeList(Object.values(snapshot.val()));
         } else {
           console.log("No data available");
@@ -141,7 +142,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes, getRecipes, recipeList, addPicture }}>
+    <AuthContext.Provider value={{ loading, currentUser, signup, login, logout, findUser, userDetails, addRecipes, getRecipes, recipeList, recipeIdList, addPicture }}>
       {loading ? null : children}
     </AuthContext.Provider>
   );

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { Rubik } from "next/font/google";
 import { motion, useCycle, Variants } from "framer-motion";
 import { IoSearch } from "react-icons/io5";
@@ -165,12 +166,9 @@ const Header = () => {
         )}
         <section className="xl:mr-40 flex gap-8 place-content-center items-center">
           <IoSearch className="text-lg" />
-          <FaRegUserCircle
-            className="text-lg cursor-pointer"
-            onClick={() => {
-              currentUser ? router.push(`/${userDetails.userName}`) : router.push("/signup");
-            }}
-          />
+          <Link href={`${userDetails ? `/${userDetails.userName}` : "/signup"}`} className={`${rubik.className}`} prefetch={false}>
+            <FaRegUserCircle className="text-lg cursor-pointer" />
+          </Link>
         </section>
       </div>
     </header>

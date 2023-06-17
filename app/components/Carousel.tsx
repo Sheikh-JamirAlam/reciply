@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import { Righteous, Rubik } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,6 +9,7 @@ import { BsArrowLeftCircle, BsArrowRightCircle } from "react-icons/bs";
 import { motion } from "framer-motion";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
+import { useAuth } from "../firebase/AuthProvider";
 
 const righteous = Righteous({
   subsets: ["latin"],
@@ -21,7 +22,12 @@ const rubik = Rubik({
 });
 
 const Carousel = () => {
+  const { currentUser, findUser, userDetails } = useAuth();
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [Autoplay({ delay: 5000, stopOnInteraction: false })]);
+
+  useEffect(() => {
+    findUser(currentUser, "onlyGetUser");
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
@@ -45,13 +51,12 @@ const Carousel = () => {
               whileHover={{ backgroundColor: "#FA9146" }}
               whileTap={{ backgroundColor: "#F1721A", scale: 0.9 }}
             >
-              <Link href="/signup" className={`${rubik.className}`} prefetch={false}>
+              <Link href={`${userDetails ? `/${userDetails.userName}` : "/signup"}`} className={`${rubik.className}`} prefetch={false}>
                 Get Recipe
               </Link>
             </motion.button>
             <Image
               src="/carousel/ramen.jpg"
-              quality={100}
               alt="Ramen"
               width={1500}
               height={1500}
@@ -66,13 +71,12 @@ const Carousel = () => {
               whileHover={{ backgroundColor: "#FA9146" }}
               whileTap={{ backgroundColor: "#F1721A", scale: 0.9 }}
             >
-              <Link href="/signup" className={`${rubik.className}`} prefetch={false}>
+              <Link href={`${userDetails ? `/${userDetails.userName}` : "/signup"}`} className={`${rubik.className}`} prefetch={false}>
                 Register
               </Link>
             </motion.button>
             <Image
               src="/carousel/taco.jpg"
-              quality={100}
               alt="Taco"
               width={1500}
               height={1500}
@@ -87,13 +91,12 @@ const Carousel = () => {
               whileHover={{ backgroundColor: "#FA9146" }}
               whileTap={{ backgroundColor: "#F1721A", scale: 0.9 }}
             >
-              <Link href="/signup" className={`${rubik.className}`} prefetch={false}>
+              <Link href={`${userDetails ? `/${userDetails.userName}` : "/signup"}`} className={`${rubik.className}`} prefetch={false}>
                 Let&apos;s Cook
               </Link>
             </motion.button>
             <Image
               src="/carousel/pasta.jpg"
-              quality={100}
               alt="Pasta"
               width={1500}
               height={1500}

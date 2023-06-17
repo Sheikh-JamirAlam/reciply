@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { TbArrowUpBar } from "react-icons/tb";
 import { BiSortDown } from "react-icons/bi";
 import { BsArrowRightCircle } from "react-icons/bs";
@@ -21,10 +23,12 @@ type Recipe = {
 
 type Props = {
   recipes: Array<Recipe> | boolean;
+  recipeIds: Array<string>;
 };
 
 const RecipeList = (props: Props) => {
   const [age, setAge] = useState("1");
+  const router = useRouter();
 
   const handleChange = (event: SelectChangeEvent) => {
     setAge(event.target.value);
@@ -83,7 +87,9 @@ const RecipeList = (props: Props) => {
               </div>
               <div className="my-auto">
                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                  <BsArrowRightCircle className="max-[570px]:text-2xl text-3xl cursor-pointer" />
+                  <Link href={`/recipe?id=${props.recipeIds[index]}`} prefetch={false}>
+                    <BsArrowRightCircle className="max-[570px]:text-2xl text-3xl cursor-pointer" />
+                  </Link>
                 </motion.div>
               </div>
             </div>
